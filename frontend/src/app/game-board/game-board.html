@@ -1,0 +1,15 @@
+
+<div *ngFor="let player of gamePlayers">
+    
+    <div *ngIf="player">
+        <div *ngIf=" player.player_id === playerId">
+            You are<br>
+            Role name: {{player.role_details.name}}
+            <!-- Type: {{player.role_details.type}} -->
+        </div>
+    </div>
+    
+</div>
+<div *ngFor="let player of gamePlayers">
+    <button *ngIf="player.is_vip && player.player_id === playerId" (click)="startNightPhase()">Start Night Phase</button>
+</div>

@@ -1,0 +1,30 @@
+<div style="text-align:center">
+    <h1>{{ title }}</h1>
+    <h2>Backend Status: {{ backendMessage }}</h2>
+    <h3 *ngIf="playerId">Your Player ID: {{ playerId }}</h3>
+  
+    <div *ngIf="!gameJoined">
+      <h3>Join or Create Game</h3>
+      <input type="text" [(ngModel)]="nameInput" placeholder="Your Name">
+      <br>
+      <button (click)="createGame()">Create New Game</button>
+      <br><br>
+      <input type="text" [(ngModel)]="roomInput" placeholder="Enter Room ID to Join">
+      <input type="text" [(ngModel)]="seatId" placeholder="Enter Seat number to join">
+      <button (click)="joinGame()">Join Game</button>
+    </div>
+  
+    <div *ngIf="gameJoined">
+      <h2>Joined Game: Room {{ currentRoomId }}</h2>
+      <h3>Players (Connected: {{ connectedPlayersCount }}):</h3>
+      <ul>
+          <li *ngFor="let player of gamePlayers">
+              {{ player.name }} - {{ player.status }} - {{ player.seat_id }} <span *ngIf="player.is_vip">(Shaman)</span>
+          </li>
+      </ul>
+      <div *ngFor="let player of gamePlayers">
+        <button *ngIf="player.is_vip && player.player_id === playerId" (click)="handleStartGame()">Start Game</button>
+      </div>
+      <!-- Add more game action buttons as needed -->
+    </div>
+  </div>

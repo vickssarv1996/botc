@@ -1,0 +1,64 @@
+<div *ngIf="nightOrderPlayerId === playerId && nightInfo['info']=='minion_info'">
+    Minions: {{nightInfo['minions']}}
+    Demon: {{nightInfo['demon']}}
+    <button (click)="closeEyes()">Close Eyes</button>
+</div>  
+
+<div *ngIf="nightOrderPlayerId === playerId && nightInfo['info']=='demon_info'">
+    Minions: {{nightInfo['minions']}}
+    Demon: {{nightInfo['demon']}}
+    <button (click)="closeEyes()">Close Eyes</button>
+</div> 
+
+<div *ngIf="nightOrderPlayerId === playerId && nightInfo['info']=='poisoner'">
+    Choose someone to poison
+    <div *ngFor="let playerId of nightInfo['players']">
+        <input type="radio" id="{{playerId}}" name="poisoner_pick" value="{{playerId}}">
+        <label for="{{playerId}}">{{nightInfo['players'][playerId]['name']}}</label>
+    </div>
+    <button (click)="closeEyes()">Close Eyes</button>
+</div> 
+
+<div *ngIf="nightOrderPlayerId === playerId && nightInfo['info']=='washerwoman'">
+    Townsfolk Role: {{nightInfo['role']}}
+    Player 1: {{nightInfo['player1']}}
+    Player 2: {{nightInfo['player2']}}
+    <button (click)="closeEyes()">Close Eyes</button>
+</div>
+
+<div *ngIf="nightOrderPlayerId === playerId && nightInfo['info']=='librarian'">
+    Outsider Role: {{nightInfo['role']}}
+    Player 1: {{nightInfo['player1']}}
+    Player 2: {{nightInfo['player2']}}
+    <button (click)="closeEyes()">Close Eyes</button>
+</div>
+
+<div *ngIf="nightOrderPlayerId === playerId && nightInfo['info']=='investigator'">
+    Minion Role: {{nightInfo['role']}}
+    Player 1: {{nightInfo['player1']}}
+    Player 2: {{nightInfo['player2']}}
+    <button (click)="closeEyes()">Close Eyes</button>   
+</div>
+
+<div *ngIf="nightOrderPlayerId === playerId && nightInfo['info']=='chef'">
+    Evil Pairs: {{nightInfo['evil_pairs']}}
+    <button (click)="closeEyes()">Close Eyes</button>
+</div>
+
+<div *ngIf="nightOrderPlayerId === playerId && nightInfo['info']=='empath'">
+    Evil neighbours: {{nightInfo['evil_neighbors']}}
+    <button (click)="closeEyes()">Close Eyes</button>
+</div>
+
+<div *ngIf="nightOrderPlayerId === playerId && nightInfo['info']=='fortune_teller'">
+    Pick 2 players to look into the crystal ball:
+    <div [style.opacity]="showFtCloseButton ? '0.5' : '1'">
+      <div *ngFor="let pid of nightInfo['players']">
+          <input type="checkbox" id="{{pid}}" name="fortune_teller_pick" value="{{pid}}" [disabled]="showFtCloseButton">
+          <label for="{{pid}}">{{nightInfo['players'][pid]['name']}}</label>
+      </div>
+
+      <button (click)="ftpick()" [disabled]="showFtCloseButton">Submit</button>
+    </div>
+    <button *ngIf="showFtCloseButton" (click)="closeEyes()">Close Eyes</button>
+</div>
